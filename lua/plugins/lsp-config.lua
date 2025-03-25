@@ -23,6 +23,11 @@ return {
 			local lspconfig = require("lspconfig")
 			lspconfig.ts_ls.setup({
 				capabilities = capabilities,
+---@diagnostic disable-next-line: unused-local
+				on_attach = function(client, bufnr)
+					-- Włącza analizowanie kodu po przez tsserver oraz eslint w czasie rzeczywistym
+					vim.api.nvim_buf_set_option(bufnr, "diagnostic_mode", "virtual_text")
+				end,
 			})
 			lspconfig.solargraph.setup({
 				capabilities = capabilities,
